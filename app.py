@@ -298,20 +298,22 @@ with tabs[2]:
     """)
 
 # ----------------- TAB 4: VIVA & DEFENSE -----------------
+# ----------------- TAB 4: TEMPORAL BIOMETRICS & NHTSA -----------------
 with tabs[3]:
-    st.subheader("📖 Viva Defense & Technical Questions")
+    st.subheader("📐 Temporal Biometrics & NHTSA Methodology Framework")
     st.markdown("""
-    ### Key Questions Teachers Ask:
+    ### 1. Spatial Eye Aperture Formulation (EAR)
+    Eye Aspect Ratio evaluates 2D facial landmark distance vectors based on the Soukupova & Cech formulation:
+    $$\\text{EAR} = \\frac{\\|p_2 - p_6\\| + \\|p_3 - p_5\\|}{2 \\cdot \\|p_1 - p_4\\|}$$
+    Where $p_1, \\dots, p_6$ represent corresponding eye perimeter landmark coordinates. Physiological eyelid closure reduces EAR below the empirical $0.20$ boundary threshold.
 
-    **Q1: Why did you not just train a standard 2D CNN on raw video frames?**
-    > **Ans:** A 2D CNN on full 1080p video frames requires immense GPU compute (30-50W power) and struggles with ambient lighting variations (night driving, shadows). By extracting **spatial facial landmarks & biometric vectors (EAR, MAR, Head Pose)** and feeding them into our **Multi-Head Deep Temporal Network**, inference takes **<1.5 milliseconds** on a low-power CPU/Raspberry Pi while achieving >96% accuracy invariant to skin tone or illumination!
+    ### 2. NHTSA PERCLOS Standard (Percentage of Eye Closure)
+    Unlike instantaneous blink detectors which cause high false-alarm rates, PERCLOS measures cumulative duration:
+    $$\\text{PERCLOS} = \\frac{1}{N} \\sum_{t=1}^N \\mathbb{I}(\\text{EAR}_t < \\tau)$$
+    Where $\\tau = 0.20$ and $N = 60$ frames (rolling 2-second time window). National Highway Traffic Safety Administration (NHTSA) benchmarks classify sustained PERCLOS $\\ge 0.30$ as active microsleep hazard.
 
-    **Q2: What is PERCLOS and why is it superior to instant blink detection?**
-    > **Ans:** PERCLOS stands for *Percentage of Eye Closure*. Normal humans blink every 2-4 seconds (taking 100-300 ms). An instant blink classifier would cause false alarms. PERCLOS computes the proportion of time within a rolling 1-minute window that the driver's eyes are at least 80% closed. NHTSA studies confirmed PERCLOS has the highest correlation with microsleeps and drowsiness crashes.
-
-    **Q3: How is Head Pose estimated?**
-    > **Ans:** Using the Perspective-n-Point (PnP) algorithm. We take 2D facial landmarks (nose tip, chin, eye corners, mouth corners) and align them with a standard 3D anthropometric facial model to solve for the camera rotation matrix, extracting **Euler angles: Pitch, Yaw, and Roll**.
+    ### 3. 3D Head Pose SolvePnP Projection
+    Rotational Euler angles (Pitch, Yaw, Roll) are computed by projecting 2D facial keypoints into standard 3D anthropometric models using Levenberg-Marquardt optimization:
+    $$\\mathbf{s} \\begin{bmatrix} u \\\\ v \\\\ 1 \\end{bmatrix} = \\mathbf{K} \\begin{bmatrix} \\mathbf{R} & \\mathbf{t} \\end{bmatrix} \\begin{bmatrix} X_w \\\\ Y_w \\\\ Z_w \\\\ 1 \\end{bmatrix}$$
+    A pitch deflection $\\le -22^\\circ$ indicates downward gaze shift (e.g., smartphone distraction), while yaw deviations $> 25^\\circ$ represent off-windshield head turns.
     """)
-
-st.markdown("---")
-st.caption("SafeDrive AI Engine • Deep Learning Computer Vision & Vigilance Safety")
