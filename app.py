@@ -122,7 +122,7 @@ tabs = st.tabs([
     "🚨 Live Cockpit Vigilance HUD",
     "🎬 Real-Time Driving Scenarios",
     "🧠 Deep Neural Architecture & Weights",
-    "📖 Viva Defense & Evaluator Q&A"
+    "📐 Temporal Biometrics & NHTSA Standards"
 ])
 
 # ----------------- TAB 1: COCKPIT HUD -----------------
