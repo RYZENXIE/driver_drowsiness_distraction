@@ -1,0 +1,46 @@
+{
+    "scaler_mean": [
+        0.2456385678222271,
+        -0.01930720597524563,
+        0.2650680142305604,
+        0.32435802802795466,
+        -5.54001192773633,
+        0.04718002439965323,
+        0.9822536232482855,
+        15.229179506688917,
+        0.3625466287112105,
+        1.1103236723749563
+    ],
+    "scaler_scale": [
+        0.07295828610653735,
+        0.03510805729799147,
+        0.30326227423775565,
+        0.22555987153970086,
+        14.518937418690085,
+        16.3294247926865,
+        4.844739340217618,
+        7.518930121158025,
+        0.277369836859121,
+        1.7137057816539334
+    ],
+    "feature_names": [
+        "ear",
+        "ear_velocity",
+        "perclos",
+        "mar",
+        "head_pitch",
+        "head_yaw",
+        "head_roll",
+        "blink_frequency",
+        "gaze_eccentricity",
+        "yawn_duration_sec"
+    ],
+    "class_labels": {
+        "0": "ALERT",
+        "1": "DROWSY / MICROSLEEP",
+        "2": "DISTRACTED",
+        "3": "FATIGUED / YAWNING"
+    },
+    "test_accuracy": 1.0,
+    "architecture": "Deep Neural Network: Input(10) -> Dense(128) -> Dense(64) -> Dense(32) -> Output(4)"
+}

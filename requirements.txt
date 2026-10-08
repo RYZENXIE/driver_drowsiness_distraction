@@ -1,0 +1,8 @@
+numpy>=1.23.0
+opencv-python-headless>=4.8.0
+mediapipe>=0.10.0
+torch>=2.0.0
+scikit-learn>=1.2.0
+streamlit>=1.24.0
+plotly>=5.15.0
+pygame>=2.5.0
